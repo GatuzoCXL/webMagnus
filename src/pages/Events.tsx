@@ -11,7 +11,7 @@ export default function Events() {
   const deleteEvent = useDeleteEvent()
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null)
 
-  const handleDelete = async (id: string) {
+  const handleDelete = async (id: string) => {
     try {
       await deleteEvent.mutateAsync(id)
       setDeleteConfirm(null)

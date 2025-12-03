@@ -10,7 +10,7 @@ export default function EditEvent() {
   const { id } = useParams<{ id: string }>()
   const { user } = useAuth()
   const navigate = useNavigate()
-  const { data: event, isLoading } = useEvent(Number(id))
+  const { data: event, isLoading } = useEvent(String(id))
   const updateEvent = useUpdateEvent()
 
   const [formData, setFormData] = useState({
