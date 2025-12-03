@@ -5,16 +5,6 @@ export function getEventStatus(event: Event): EventStatus {
   const start = event.fechaInicio
   const end = event.fechaFin
 
-  console.log('Estado del evento:', {
-    titulo: event.titulo,
-    now: new Date(now).toISOString(),
-    start: new Date(start).toISOString(),
-    end: new Date(end).toISOString(),
-    nowTimestamp: now,
-    startTimestamp: start,
-    endTimestamp: end
-  })
-
   if (end < now) {
     return EventStatus.COMPLETED
   } else if (start <= now && now <= end) {

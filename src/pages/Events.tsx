@@ -16,7 +16,7 @@ export default function Events() {
       await deleteEvent.mutateAsync(id)
       setDeleteConfirm(null)
     } catch (error) {
-      console.error('Error al eliminar evento:', error)
+      console.error('Error al eliminar eventos:', error)
     }
   }
 

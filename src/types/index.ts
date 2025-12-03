@@ -2,7 +2,14 @@ export interface User {
   id: string
   nombre: string
   email: string
+  rol: number
   createdAt?: string
+}
+
+export enum Rol {
+  Cliente = 0,
+  Organizador = 1,
+  Administrador = 2
 }
 
 export interface Event {
@@ -24,6 +31,27 @@ export enum EventStatus {
   CANCELLED = 'CANCELLED'
 }
 
+export interface EventoInvitado {
+  id: string
+  eventoId: string
+  usuarioId: string
+  estado: EstadoInvitacion
+  esAutopostulacion: boolean
+  fechaInvitacion: string
+  fechaRespuesta?: string
+  mensaje?: string
+  evento?: Event
+  usuario?: User
+}
+
+export enum EstadoInvitacion {
+  PendienteRespuesta = 0,
+  PendienteAprobacion = 1,
+  Confirmado = 2,
+  RechazadoPorInvitado = 3,
+  RechazadoPorOrganizador = 4
+}
+
 export interface LoginRequest {
   email: string
   contrasena: string
@@ -33,7 +61,7 @@ export interface RegisterRequest {
   nombre: string
   email: string
   contrasena: string
-  rol: string
+  rol?: number
 }
 
 export interface CreateEventRequest {
@@ -56,4 +84,15 @@ export interface AuthResponse {
   token: string
   user: User
   expiresAtUtc: string
+}
+
+export interface InvitarUsuarioRequest {
+  eventoId: string
+  usuarioId: string
+  mensaje?: string
+}
+
+export interface AutopostularseRequest {
+  eventoId: string
+  mensaje?: string
 }

@@ -11,6 +11,7 @@ import EditEvent from './pages/EditEvent'
 import NotFound from './pages/NotFound'
 import Profile from './pages/Profile'
 import Landing from './pages/Landing'
+import MyInvitations from './pages/MyInvitations'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/events/create" element={<CreateEvent />} />
             <Route path="/events/:id" element={<EventDetail />} />
             <Route path="/events/:id/edit" element={<EditEvent />} />
+            <Route path="/invitations" element={<MyInvitations />} />
             <Route path="/profile" element={<Profile />} />
           </Route>
           

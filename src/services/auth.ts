@@ -14,7 +14,8 @@ export const authService = {
     await api.post<any>('/api/Auth/registrar', {
       nombre: data.nombre,
       email: data.email,
-      password: data.contrasena
+      password: data.contrasena,
+      rol: data.rol || 0
     })
     return await authService.login({ email: data.email, contrasena: data.contrasena })
   },

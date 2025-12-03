@@ -4,13 +4,19 @@ import { getEventStatus, getStatusText, getStatusColor, canDeleteEvent, canEditE
 import { formatEventDateRange, formatDate } from '../utils/formatDate'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { useAuth } from '../context/AuthContext'
+import EventInvitations from '../components/EventInvitations'
 
 export default function EventDetail() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { data: event, isLoading } = useEvent(id!)
   const deleteEvent = useDeleteEvent()
+  const { user } = useAuth()
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [activeTab, setActiveTab] = useState<'details' | 'guests'>('details')
+
+  const isEventOwner = user?.id === event?.organizadorId
 
   const handleDelete = async () => {
     if (!event) return
@@ -101,7 +107,36 @@ export default function EventDetail() {
           </div>
         </div>
 
-        <div className="space-y-6">
+        {/* Tabs */}
+        {isEventOwner && (
+          <div className="border-b border-gray-200 mb-6">
+            <nav className="flex gap-4">
+              <button
+                onClick={() => setActiveTab('details')}
+                className={`pb-3 px-1 border-b-2 font-medium text-sm transition-colors ${
+                  activeTab === 'details'
+                    ? 'border-primary text-primary'
+                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                Detalles
+              </button>
+              <button
+                onClick={() => setActiveTab('guests')}
+                className={`pb-3 px-1 border-b-2 font-medium text-sm transition-colors ${
+                  activeTab === 'guests'
+                    ? 'border-primary text-primary'
+                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                Invitados
+              </button>
+            </nav>
+          </div>
+        )}
+
+        {activeTab === 'details' ? (
+          <div className="space-y-6">
           <div>
             <h2 className="text-lg font-semibold text-gray-700 mb-2">Descripción</h2>
             <p className="text-gray-600 whitespace-pre-wrap">{event.descripcion}</p>
@@ -160,6 +195,9 @@ export default function EventDetail() {
             </div>
           </div>
         </div>
+        ) : (
+          <EventInvitations eventoId={event.id} />
+        )}
       </motion.div>
 
       {/* Delete Confirmation Modal */}
