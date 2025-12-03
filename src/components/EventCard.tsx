@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 interface EventCardProps {
   event: Event
-  onDelete?: (id: number) => void
+  onDelete?: (id: string) => void
 }
 
 export default function EventCard({ event, onDelete }: EventCardProps) {
