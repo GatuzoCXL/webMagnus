@@ -10,7 +10,7 @@ export function useEvents(organizadorId: string) {
   })
 }
 
-export function useEvent(eventId: number) {
+export function useEvent(eventId: string) {
   return useQuery({
     queryKey: ['event', eventId],
     queryFn: () => eventService.getEventById(eventId),
@@ -33,7 +33,7 @@ export function useUpdateEvent() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: ({ id, event }: { id: number; event: Partial<CreateEventRequest> }) =>
+    mutationFn: ({ id, event }: { id: string; event: Partial<CreateEventRequest> }) =>
       eventService.updateEvent(id, event),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['events'] })
@@ -46,7 +46,7 @@ export function useDeleteEvent() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: (eventId: number) => eventService.deleteEvent(eventId),
+    mutationFn: (eventId: string) => eventService.deleteEvent(eventId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['events'] })
     },

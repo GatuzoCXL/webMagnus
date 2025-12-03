@@ -8,7 +8,7 @@ import { useState } from 'react'
 export default function EventDetail() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
-  const { data: event, isLoading } = useEvent(Number(id))
+  const { data: event, isLoading } = useEvent(id!)
   const deleteEvent = useDeleteEvent()
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 

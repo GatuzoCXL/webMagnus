@@ -81,7 +81,7 @@ export default function EditEvent() {
 
     try {
       await updateEvent.mutateAsync({
-        id: Number(id),
+        id: id!,
         event: {
           titulo: formData.titulo,
           descripcion: formData.descripcion,

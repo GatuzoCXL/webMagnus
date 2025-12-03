@@ -7,7 +7,7 @@ export const eventService = {
     return Array.isArray(response.data) ? response.data : (response.data.data || [])
   },
 
-  async getEventById(id: number): Promise<Event> {
+  async getEventById(id: string): Promise<Event> {
     const response = await api.get<any>(`/api/Eventos/${id}`)
     return response.data.data || response.data
   },
@@ -17,12 +17,12 @@ export const eventService = {
     return response.data.data || response.data
   },
 
-  async updateEvent(id: number, event: Partial<CreateEventRequest>): Promise<Event> {
+  async updateEvent(id: string, event: Partial<CreateEventRequest>): Promise<Event> {
     const response = await api.put<any>(`/api/Eventos/${id}`, event)
     return response.data.data || response.data
   },
 
-  async deleteEvent(id: number): Promise<void> {
+  async deleteEvent(id: string): Promise<void> {
     await api.delete(`/api/Eventos/${id}`)
   },
 }
