@@ -12,6 +12,9 @@ import NotFound from './pages/NotFound'
 import Profile from './pages/Profile'
 import Landing from './pages/Landing'
 import MyInvitations from './pages/MyInvitations'
+import Organizadores from './pages/Organizadores'
+import OrganizadorDetail from './pages/OrganizadorDetail'
+import BecomeOrganizer from './pages/BecomeOrganizer'
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
             <Route path="/events/:id" element={<EventDetail />} />
             <Route path="/events/:id/edit" element={<EditEvent />} />
             <Route path="/invitations" element={<MyInvitations />} />
+            <Route path="/organizadores" element={<Organizadores />} />
+            <Route path="/organizadores/:id" element={<OrganizadorDetail />} />
+            <Route path="/become-organizer" element={<BecomeOrganizer />} />
             <Route path="/profile" element={<Profile />} />
           </Route>
           
