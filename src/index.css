@@ -15,9 +15,24 @@
     --error: 239 68 68; /* Red 500 */
     --warning: 245 158 11; /* Amber 500 */
     --info: 59 130 246; /* Blue 500 */
-    --bg-body: 249 250 251;
-    --text-main: 17 24 39;
-    --card-bg: 255 255 255;
+    --bg-body: 249 250 251; /* Gray 50 */
+    --text-main: 17 24 39; /* Gray 900 */
+    --card-bg: 255 255 255; /* White */
+  }
+
+  .dark {
+    --primary: 99 102 241; /* Indigo 500 - Más brillante para dark */
+    --primary-dark: 79 70 229; /* Indigo 600 */
+    --secondary: 244 114 182; /* Pink 400 - Más brillante */
+    --secondary-dark: 236 72 153; /* Pink 500 */
+    --tertiary: 167 139 250; /* Purple 400 */
+    --success: 52 211 153; /* Emerald 400 */
+    --error: 248 113 113; /* Red 400 */
+    --warning: 251 191 36; /* Amber 400 */
+    --info: 96 165 250; /* Blue 400 */
+    --bg-body: 17 24 39; /* Gray 900 */
+    --text-main: 243 244 246; /* Gray 100 */
+    --card-bg: 31 41 55; /* Gray 800 */
   }
 
   body {
@@ -48,23 +63,24 @@
   .btn-outline {
     border: 2px solid rgb(var(--primary));
     color: rgb(var(--primary));
-    @apply bg-transparent hover:bg-indigo-50 focus:ring-indigo-500;
+    @apply bg-transparent hover:bg-indigo-50 dark:hover:bg-indigo-900/20 focus:ring-indigo-500;
   }
 
   .btn-ghost {
     @apply text-gray-500 hover:text-gray-700 hover:bg-gray-100;
+    @apply dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700;
   }
   
   .card {
     background-color: rgb(var(--card-bg));
-    @apply rounded-xl shadow-xl border border-gray-100 p-6 transition-all duration-300;
+    @apply rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 p-6 transition-all duration-300;
     @apply hover:-translate-y-0.5 hover:shadow-2xl;
   }
   
   .input {
-    @apply w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg transition-all duration-200;
-    @apply focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent focus:bg-white;
-    @apply text-gray-900 placeholder-gray-400;
+    @apply w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent focus:bg-white dark:focus:bg-gray-800;
+    @apply text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500;
   }
 
   .input-icon-left {

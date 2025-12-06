@@ -25,15 +25,15 @@ export default function Dashboard() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-8"
       >
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
           ¡Bienvenido, {user?.nombre}!
         </h1>
-        <p className="text-gray-600">Aquí está el resumen de tus eventos</p>
+        <p className="text-gray-600 dark:text-gray-400">Aquí está el resumen de tus eventos</p>
       </motion.div>
 
       {isLoading ? (
         <div className="flex justify-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary dark:border-indigo-400"></div>
         </div>
       ) : (
         <>
@@ -146,7 +146,7 @@ export default function Dashboard() {
             className="card"
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">Acciones Rápidas</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Acciones Rápidas</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <Link

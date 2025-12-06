@@ -118,8 +118,8 @@ export default function BecomeOrganizer() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-gray-600">Verificando tu estado...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary dark:border-indigo-400 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">Verificando tu estado...</p>
         </div>
       </div>
     )
@@ -132,8 +132,8 @@ export default function BecomeOrganizer() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-8"
       >
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Conviértete en Organizador</h1>
-        <p className="text-gray-600">Completa tu perfil profesional para ofrecer tus servicios</p>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Conviértete en Organizador</h1>
+        <p className="text-gray-600 dark:text-gray-400">Completa tu perfil profesional para ofrecer tus servicios</p>
       </motion.div>
 
       <motion.div
@@ -144,7 +144,7 @@ export default function BecomeOrganizer() {
       >
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="nombreEmpresa" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="nombreEmpresa" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Nombre de la Empresa *
             </label>
             <input
@@ -186,7 +186,7 @@ export default function BecomeOrganizer() {
           </div>
 
             <div>
-            <label htmlFor="direccion" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="direccion" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Dirección *
             </label>
             <input
@@ -254,7 +254,7 @@ export default function BecomeOrganizer() {
           </div>
 
 <div>
-  <label htmlFor="especialidad" className="block text-sm font-medium text-gray-700 mb-2">
+  <label htmlFor="especialidad" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
     Especialidad *
   </label>
   <input
@@ -272,7 +272,7 @@ export default function BecomeOrganizer() {
 </div>
 
 <div className="mt-6">
-  <label htmlFor="descripcion" className="block text-sm font-medium text-gray-700 mb-2">
+  <label htmlFor="descripcion" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
     Descripción del Servicio * (mínimo 50 caracteres)
   </label>
   <textarea
@@ -289,8 +289,8 @@ export default function BecomeOrganizer() {
   />
   
   <div className="flex justify-between items-center mt-1">
-    <p className="text-gray-500 text-sm">
-      {formData.descripcion.length} / 50 caracteres mínimo
+    <p className="text-gray-500 dark:text-gray-400 text-sm">
+      {formData.descripcion.length}/50 caracteres mínimo
     </p>
     {validationErrors.descripcion && (
       <p className="text-red-500 text-sm">{validationErrors.descripcion}</p>

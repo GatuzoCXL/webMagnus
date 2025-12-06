@@ -75,16 +75,16 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary to-tertiary px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary to-tertiary dark:from-pink-900 dark:to-purple-900 px-4 transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         className="max-w-md w-full"
       >
-        <div className="bg-white rounded-2xl shadow-2xl p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-secondary mb-2">Registro</h1>
-            <p className="text-gray-600">Crea tu cuenta en Magnus</p>
+            <h1 className="text-4xl font-bold text-secondary dark:text-pink-400 mb-2">Registro</h1>
+            <p className="text-gray-600 dark:text-gray-400">Crea tu cuenta en Magnus</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -99,7 +99,7 @@ export default function Register() {
             )}
 
             <div>
-              <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Nombre Completo
               </label>
               <input
@@ -115,7 +115,7 @@ export default function Register() {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Email
               </label>
               <input
@@ -131,7 +131,7 @@ export default function Register() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Contraseña
               </label>
               <div className="relative">
@@ -148,7 +148,7 @@ export default function Register() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 focus:outline-none"
                 >
                   {showPassword ? (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -165,7 +165,7 @@ export default function Register() {
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Confirmar Contraseña
               </label>
               <div className="relative">
@@ -182,7 +182,7 @@ export default function Register() {
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 focus:outline-none"
                 >
                   {showConfirmPassword ? (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,9 +208,9 @@ export default function Register() {
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-400">
               ¿Ya tienes cuenta?{' '}
-              <Link to="/login" className="text-secondary font-semibold hover:underline">
+              <Link to="/login" className="text-secondary dark:text-pink-400 font-semibold hover:underline">
                 Inicia sesión
               </Link>
             </p>

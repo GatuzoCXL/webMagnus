@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
+import { ThemeProvider } from './context/ThemeContext'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -18,8 +19,9 @@ import BecomeOrganizer from './pages/BecomeOrganizer'
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
+    <ThemeProvider>
+      <AuthProvider>
+        <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
@@ -37,12 +39,13 @@ function App() {
             <Route path="/become-organizer" element={<BecomeOrganizer />} />
             <Route path="/profile" element={<Profile />} />
           </Route>
-          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
+    </ThemeProvider>
   )
+} )
 }
 
 export default App
