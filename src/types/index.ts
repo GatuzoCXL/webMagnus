@@ -67,8 +67,8 @@ export interface RegisterRequest {
 export interface CreateEventRequest {
   titulo: string
   descripcion: string
-  fechaInicio: number
-  fechaFin: number
+  fechaInicio: string
+  fechaFin: string
   lugar: string
   capacidad: number
   organizadorId: string

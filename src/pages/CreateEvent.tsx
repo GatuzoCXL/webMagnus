@@ -62,8 +62,8 @@ export default function CreateEvent() {
       await createEvent.mutateAsync({
         titulo: formData.titulo,
         descripcion: formData.descripcion,
-        fechaInicio: startDateTime,
-        fechaFin: endDateTime,
+        fechaInicio: new Date(startDateTime).toISOString(),
+        fechaFin: new Date(endDateTime).toISOString(),
         lugar: formData.lugar,
         capacidad: capacity,
         organizadorId: user?.id || '',
