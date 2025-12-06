@@ -44,8 +44,8 @@ export default function MyInvitations() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-6"
       >
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Mis Invitaciones</h1>
-        <p className="text-gray-600">Eventos a los que has sido invitado o te has postulado</p>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Mis Invitaciones</h1>
+        <p className="text-gray-600 dark:text-gray-400">Eventos a los que has sido invitado o te has postulado</p>
       </motion.div>
 
       {invitations.length === 0 ? (
@@ -57,8 +57,8 @@ export default function MyInvitations() {
           <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
-          <h2 className="text-xl font-semibold text-gray-700 mb-2">No tienes invitaciones</h2>
-          <p className="text-gray-500">Cuando te inviten a un evento, aparecerá aquí</p>
+          <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">No tienes invitaciones</h2>
+          <p className="text-gray-500 dark:text-gray-400">Cuando te inviten a un evento, aparecerá aquí</p>
         </motion.div>
       ) : (
         <div className="space-y-4">
@@ -74,10 +74,10 @@ export default function MyInvitations() {
                 <div className="flex-1">
                   <div className="flex items-start gap-3 mb-2">
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-gray-900 mb-1">
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-1">
                         {invitation.evento?.titulo || 'Evento'}
                       </h3>
-                      <p className="text-gray-600 text-sm mb-2">
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
                         {invitation.evento?.descripcion || ''}
                       </p>
                     </div>
@@ -86,7 +86,7 @@ export default function MyInvitations() {
                     </span>
                   </div>
 
-                  <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                  <div className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
                     {invitation.evento?.fechaInicio && (
                       <div className="flex items-center">
                         <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -115,13 +115,13 @@ export default function MyInvitations() {
 
                   {invitation.mensaje && (
                     <div className="mt-3 p-3 bg-gray-50 rounded-lg">
-                      <p className="text-sm text-gray-700">
+                      <p className="text-sm text-gray-700 dark:text-gray-300">
                         <span className="font-semibold">Mensaje:</span> {invitation.mensaje}
                       </p>
                     </div>
                   )}
 
-                  <div className="mt-2 text-xs text-gray-500">
+                  <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
                     Invitación recibida: {formatDate(new Date(invitation.fechaInvitacion).getTime(), 'PPP p')}
                   </div>
                 </div>
@@ -146,7 +146,7 @@ export default function MyInvitations() {
                 )}
 
                 {invitation.estado === EstadoInvitacion.PendienteAprobacion && (
-                  <div className="text-sm text-gray-600 italic">
+                  <div className="text-sm text-gray-600 dark:text-gray-400 italic">
                     Esperando aprobación del organizador
                   </div>
                 )}

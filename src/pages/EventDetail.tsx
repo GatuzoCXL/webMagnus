@@ -31,7 +31,7 @@ export default function EventDetail() {
   if (isLoading) {
     return (
       <div className="flex justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary dark:border-indigo-400"></div>
       </div>
     )
   }
@@ -40,7 +40,7 @@ export default function EventDetail() {
     return (
       <div className="px-4 py-6">
         <div className="card text-center py-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Evento no encontrado</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Evento no encontrado</h2>
           <Link to="/events" className="btn btn-primary inline-block">
             Volver a Mis Eventos
           </Link>
@@ -76,7 +76,7 @@ export default function EventDetail() {
       >
         <div className="flex justify-between items-start mb-6">
           <div className="flex-1">
-            <h1 className="text-3xl font-bold text-gray-900 mb-3">{event.titulo}</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">{event.titulo}</h1>
             <span className={`inline-block px-4 py-2 rounded-full text-sm font-semibold ${statusColor}`}>
               {statusText}
             </span>
@@ -109,14 +109,14 @@ export default function EventDetail() {
 
         {/* Tabs */}
         {isEventOwner && (
-          <div className="border-b border-gray-200 mb-6">
+          <div className="border-b border-gray-200 dark:border-gray-700 mb-6">
             <nav className="flex gap-4">
               <button
                 onClick={() => setActiveTab('details')}
                 className={`pb-3 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'details'
                     ? 'border-primary text-primary'
-                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
                 }`}
               >
                 Detalles
@@ -126,7 +126,7 @@ export default function EventDetail() {
                 className={`pb-3 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'guests'
                     ? 'border-primary text-primary'
-                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
                 }`}
               >
                 Invitados
@@ -138,8 +138,8 @@ export default function EventDetail() {
         {activeTab === 'details' ? (
           <div className="space-y-6">
           <div>
-            <h2 className="text-lg font-semibold text-gray-700 mb-2">Descripción</h2>
-            <p className="text-gray-600 whitespace-pre-wrap">{event.descripcion}</p>
+            <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">Descripción</h2>
+            <p className="text-gray-600 dark:text-gray-400 whitespace-pre-wrap">{event.descripcion}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -149,8 +149,8 @@ export default function EventDetail() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 <div>
-                  <p className="text-sm text-gray-500">Fecha y Hora</p>
-                  <p className="text-gray-900 font-medium">{formatEventDateRange(event.fechaInicio, event.fechaFin)}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Fecha y Hora</p>
+                  <p className="text-gray-900 dark:text-gray-100 font-medium">{formatEventDateRange(event.fechaInicio, event.fechaFin)}</p>
                 </div>
               </div>
 
@@ -160,8 +160,8 @@ export default function EventDetail() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
                 <div>
-                  <p className="text-sm text-gray-500">Ubicación</p>
-                  <p className="text-gray-900 font-medium">{event.lugar}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Ubicación</p>
+                  <p className="text-gray-900 dark:text-gray-100 font-medium">{event.lugar}</p>
                 </div>
               </div>
 
@@ -170,26 +170,26 @@ export default function EventDetail() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
                 <div>
-                  <p className="text-sm text-gray-500">Capacidad</p>
-                  <p className="text-gray-900 font-medium">{event.capacidad} personas</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Capacidad</p>
+                  <p className="text-gray-900 dark:text-gray-100 font-medium">{event.capacidad} personas</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-lg font-semibold text-gray-700 mb-4">Información Adicional</h3>
+            <div className="bg-gray-50 dark:bg-gray-700/50 p-6 rounded-lg">
+              <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">Información Adicional</h3>
               <div className="space-y-3">
                 <div>
-                  <p className="text-sm text-gray-500">Estado del Evento</p>
-                  <p className="text-gray-900">{statusText}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Estado del Evento</p>
+                  <p className="text-gray-900 dark:text-gray-100">{statusText}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Fecha de Inicio</p>
-                  <p className="text-gray-900">{formatDate(event.fechaInicio, 'PPP p')}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Fecha de Inicio</p>
+                  <p className="text-gray-900 dark:text-gray-100">{formatDate(event.fechaInicio, 'PPP p')}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Fecha de Finalización</p>
-                  <p className="text-gray-900">{formatDate(event.fechaFin, 'PPP p')}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Fecha de Finalización</p>
+                  <p className="text-gray-900 dark:text-gray-100">{formatDate(event.fechaFin, 'PPP p')}</p>
                 </div>
               </div>
             </div>
@@ -206,12 +206,12 @@ export default function EventDetail() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-xl p-6 max-w-md mx-4"
+            className="bg-white dark:bg-gray-800 rounded-xl p-6 max-w-md mx-4"
           >
-            <h3 className="text-xl font-bold text-gray-900 mb-4">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
               ¿Eliminar evento?
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
               Esta acción no se puede deshacer. El evento "{event.titulo}" será eliminado permanentemente.
             </p>
             <div className="flex gap-4">

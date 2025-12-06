@@ -51,7 +51,7 @@ export default function EventInvitations({ eventoId }: EventInvitationsProps) {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900">Invitados</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Invitados</h2>
         <div className="flex gap-2 text-sm">
           <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full font-semibold">
             {confirmed.length} confirmados
@@ -65,14 +65,14 @@ export default function EventInvitations({ eventoId }: EventInvitationsProps) {
       </div>
 
       {invitations.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">
+        <div className="text-center py-8 text-gray-500 dark:text-gray-400">
           No hay invitados aún
         </div>
       ) : (
         <>
           {pendingApprovals.length > 0 && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-3">Solicitudes Pendientes</h3>
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">Solicitudes Pendientes</h3>
               <div className="space-y-2">
                 {pendingApprovals.map((invitation) => (
                   <motion.div
@@ -93,7 +93,7 @@ export default function EventInvitations({ eventoId }: EventInvitationsProps) {
                         </div>
                         <p className="text-sm text-gray-600">{invitation.usuario?.email}</p>
                         {invitation.mensaje && (
-                          <p className="text-sm text-gray-700 mt-2 italic">"{invitation.mensaje}"</p>
+                          <p className="text-sm text-gray-700 dark:text-gray-300 mt-2 italic">"{invitation.mensaje}"</p>
                         )}
                         <p className="text-xs text-gray-500 mt-1">
                           Solicitó: {formatDate(new Date(invitation.fechaInvitacion).getTime(), 'PPP p')}
@@ -124,7 +124,7 @@ export default function EventInvitations({ eventoId }: EventInvitationsProps) {
 
           {confirmed.length > 0 && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-3">Confirmados</h3>
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">Confirmados</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {confirmed.map((invitation) => (
                   <div
@@ -153,7 +153,7 @@ export default function EventInvitations({ eventoId }: EventInvitationsProps) {
 
           {others.length > 0 && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-3">Otros</h3>
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">Otros</h3>
               <div className="space-y-2">
                 {others.map((invitation) => (
                   <div

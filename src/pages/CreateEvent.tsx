@@ -82,8 +82,8 @@ export default function CreateEvent() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-8"
       >
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Crear Nuevo Evento</h1>
-        <p className="text-gray-600">Completa los detalles del evento</p>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Crear Nuevo Evento</h1>
+        <p className="text-gray-600 dark:text-gray-400">Completa los detalles del evento</p>
       </motion.div>
 
       <motion.div
@@ -104,7 +104,7 @@ export default function CreateEvent() {
           )}
 
           <div>
-            <label htmlFor="titulo" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="titulo" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Título del Evento *
             </label>
             <input
@@ -120,7 +120,7 @@ export default function CreateEvent() {
           </div>
 
           <div>
-            <label htmlFor="descripcion" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="descripcion" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Descripción *
             </label>
             <textarea
@@ -136,7 +136,7 @@ export default function CreateEvent() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="startDate" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="startDate" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Fecha de Inicio *
               </label>
               <input
@@ -151,7 +151,7 @@ export default function CreateEvent() {
             </div>
 
             <div>
-              <label htmlFor="startTime" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="startTime" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Hora de Inicio *
               </label>
               <input
@@ -166,7 +166,7 @@ export default function CreateEvent() {
             </div>
 
             <div>
-              <label htmlFor="endDate" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="endDate" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Fecha de Fin *
               </label>
               <input
@@ -181,7 +181,7 @@ export default function CreateEvent() {
             </div>
 
             <div>
-              <label htmlFor="endTime" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="endTime" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Hora de Fin *
               </label>
               <input
@@ -197,7 +197,7 @@ export default function CreateEvent() {
           </div>
 
           <div>
-            <label htmlFor="lugar" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="lugar" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Lugar *
             </label>
             <input
@@ -213,7 +213,7 @@ export default function CreateEvent() {
           </div>
 
           <div>
-            <label htmlFor="capacidad" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="capacidad" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Capacidad de Personas *
             </label>
             <input
