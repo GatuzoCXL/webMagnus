@@ -103,7 +103,7 @@ export default function BecomeOrganizer() {
         usuarioId: user.id,
       },
       {
-        onSuccess: (data) => {
+        onSuccess: () => {
           alert('¡Perfil de organizador creado exitosamente!')
           // Force reload to update the dashboard and UI
           window.location.href = '/dashboard'
