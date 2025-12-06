@@ -13,11 +13,6 @@ export default function Dashboard() {
   const { data: organizador, isLoading: isLoadingOrganizador } = useOrganizadorByUsuarioId(user?.id)
   const { data: organizadorStats, isLoading: isLoadingStats } = useOrganizadorStats(organizador?.id)
 
-  // Debug: Log organizador data
-  console.log('Dashboard - User ID:', user?.id)
-  console.log('Dashboard - Organizador:', organizador)
-  console.log('Dashboard - Is Loading Organizador:', isLoadingOrganizador)
-
   const stats = {
     total: events?.length || 0,
     upcoming: events?.filter(e => getEventStatus(e) === EventStatus.UPCOMING).length || 0,

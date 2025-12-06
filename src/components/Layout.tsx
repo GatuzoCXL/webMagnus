@@ -2,6 +2,7 @@ import { ReactNode, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useTheme } from '../context/ThemeContext'
+import { useOrganizadorByUsuarioId } from '../hooks/useOrganizadores'
 
 interface LayoutProps {
   children: ReactNode
@@ -14,6 +15,7 @@ export default function Layout({ children }: LayoutProps) {
   const navigate = useNavigate()
   const [showUserMenu, setShowUserMenu] = useState(false)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const { data: organizador } = useOrganizadorByUsuarioId(user?.id)
 
   const handleLogout = () => {
     logout()
@@ -63,16 +65,18 @@ export default function Layout({ children }: LayoutProps) {
                 >
                   Invitaciones
                 </Link>
-                <Link
-                  to="/organizadores"
-                  className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                    isActive('/organizadores')
-                      ? 'border-primary text-gray-900 dark:text-white'
-                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200'
-                  }`}
-                >
-                  Organizadores
-                </Link>
+                {!organizador && (
+                  <Link
+                    to="/organizadores"
+                    className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
+                      isActive('/organizadores')
+                        ? 'border-primary text-gray-900 dark:text-white'
+                        : 'border-transparent text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200'
+                    }`}
+                  >
+                    Organizadores
+                  </Link>
+                )}
               </div>
             </div>
             
@@ -220,17 +224,19 @@ export default function Layout({ children }: LayoutProps) {
               >
                 Invitaciones
               </Link>
-              <Link
-                to="/organizadores"
-                onClick={() => setShowMobileMenu(false)}
-                className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${
-                  isActive('/organizadores')
-                    ? 'bg-indigo-50 dark:bg-indigo-900/20 border-primary text-primary'
-                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200'
-                }`}
-              >
-                Organizadores
-              </Link>
+              {!organizador && (
+                <Link
+                  to="/organizadores"
+                  onClick={() => setShowMobileMenu(false)}
+                  className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${
+                    isActive('/organizadores')
+                      ? 'bg-indigo-50 dark:bg-indigo-900/20 border-primary text-primary'
+                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200'
+                  }`}
+                >
+                  Organizadores
+                </Link>
+              )}
             </div>
             <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
               <div className="flex items-center px-4">

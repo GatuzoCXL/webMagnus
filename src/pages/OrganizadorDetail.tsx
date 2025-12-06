@@ -57,7 +57,7 @@ export default function OrganizadorDetail() {
             )}
           </div>
           {organizador.verificado && (
-            <span className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 text-sm font-semibold rounded-full">
+            <span className="inline-flex items-center px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-semibold rounded-full">
               <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
@@ -86,7 +86,7 @@ export default function OrganizadorDetail() {
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div className="bg-gray-50 p-6 rounded-lg">
+          <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Información de Contacto</h3>
             <div className="space-y-3">
               <div className="flex items-center">
@@ -107,10 +107,10 @@ export default function OrganizadorDetail() {
             </div>
           </div>
 
-          <div className="bg-primary-light p-6 rounded-lg">
+          <div className="bg-indigo-50 dark:bg-indigo-900/20 p-6 rounded-lg">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Precio por Evento</h3>
             <div className="flex items-baseline">
-              <span className="text-4xl font-bold text-primary">${organizador.precioPorEvento.toLocaleString()}</span>
+              <span className="text-4xl font-bold text-primary dark:text-indigo-400">${organizador.precioPorEvento.toLocaleString()}</span>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">Precio base por evento</p>
             <button className="w-full btn btn-primary mt-4">
