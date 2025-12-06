@@ -10,8 +10,13 @@ import { Link } from 'react-router-dom'
 export default function Dashboard() {
   const { user } = useAuth()
   const { data: events, isLoading } = useEvents(user?.id || '')
-  const { data: organizador } = useOrganizadorByUsuarioId(user?.id)
+  const { data: organizador, isLoading: isLoadingOrganizador } = useOrganizadorByUsuarioId(user?.id)
   const { data: organizadorStats, isLoading: isLoadingStats } = useOrganizadorStats(organizador?.id)
+
+  // Debug: Log organizador data
+  console.log('Dashboard - User ID:', user?.id)
+  console.log('Dashboard - Organizador:', organizador)
+  console.log('Dashboard - Is Loading Organizador:', isLoadingOrganizador)
 
   const stats = {
     total: events?.length || 0,

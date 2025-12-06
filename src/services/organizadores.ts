@@ -46,9 +46,17 @@ export const organizadorService = {
     return response.data.data
   },
 
-  async getByUsuarioId(usuarioId: string): Promise<Organizador> {
-    const response = await api.get<{ data: Organizador }>(`/api/Organizadores/usuario/${usuarioId}`)
-    return response.data.data
+  async getByUsuarioId(usuarioId: string): Promise<Organizador | null> {
+    try {
+      const response = await api.get<{ data: Organizador }>(`/api/Organizadores/usuario/${usuarioId}`)
+      return response.data.data
+    } catch (error: any) {
+      // Return null if organizador not found (404)
+      if (error.response?.status === 404) {
+        return null
+      }
+      throw error
+    }
   },
 
   async create(data: CreateOrganizadorRequest): Promise<Organizador> {
