@@ -1,13 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { useCreateOrganizador } from '../hooks/useOrganizadores'
+import { useCreateOrganizador, useOrganizadorByUsuarioId } from '../hooks/useOrganizadores'
 import { useAuth } from '../context/AuthContext'
 
 export default function BecomeOrganizer() {
   const navigate = useNavigate()
   const { user } = useAuth()
   const { mutate: createOrganizador, isPending } = useCreateOrganizador()
+  const { data: existingOrganizador, isLoading: isCheckingOrganizador } = useOrganizadorByUsuarioId(user?.id)
+
+  useEffect(() => {
+    if (existingOrganizador) {
+      alert('Ya estás registrado como organizador')
+      navigate(`/organizadores/${existingOrganizador.id}`)
+    }
+  }, [existingOrganizador, navigate])
 
   const [formData, setFormData] = useState({
     nombreEmpresa: '',
@@ -19,8 +27,55 @@ export default function BecomeOrganizer() {
     especialidad: '',
   })
 
+  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({})
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+
+  const validateForm = (): boolean => {
+    const errors: Record<string, string> = {}
+
+    // Validar nombre de empresa
+    if (formData.nombreEmpresa.length < 3) {
+      errors.nombreEmpresa = 'El nombre debe tener al menos 3 caracteres'
+    }
+
+    // Validar teléfono (formato básico)
+    const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/
+    if (!phoneRegex.test(formData.telefono)) {
+      errors.telefono = 'Teléfono inválido (mínimo 10 dígitos)'
+    }
+
+    // Validar dirección
+    if (formData.direccion.trim().length < 5) {
+      errors.direccion = 'La dirección debe tener al menos 5 caracteres'
+    }
+
+    // Validar precio
+    const precio = parseFloat(formData.precioPorEvento)
+    if (isNaN(precio) || precio < 1000 || precio > 500000) {
+      errors.precioPorEvento = 'El precio debe estar entre $1,000 y $500,000'
+    }
+
+    // Validar años de experiencia
+    const experiencia = parseInt(formData.añosExperiencia)
+    if (isNaN(experiencia) || experiencia < 1 || experiencia > 50) {
+      errors.añosExperiencia = 'Los años de experiencia deben estar entre 1 y 50'
+    }
+
+    // Validar especialidad
+    if (formData.especialidad.trim().length < 5) {
+      errors.especialidad = 'La especialidad debe tener al menos 5 caracteres'
+    }
+
+    // Validar descripción
+    if (formData.descripcion.trim().length < 50) {
+      errors.descripcion = 'La descripción debe tener al menos 50 caracteres para describir tus servicios'
+    }
+
+    setValidationErrors(errors)
+    return Object.keys(errors).length === 0
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -32,15 +87,19 @@ export default function BecomeOrganizer() {
       return
     }
 
+    if (!validateForm()) {
+      return
+    }
+
     createOrganizador(
       {
-        nombreEmpresa: formData.nombreEmpresa,
-        descripcion: formData.descripcion || undefined,
-        telefono: formData.telefono,
-        direccion: formData.direccion || undefined,
+        nombreEmpresa: formData.nombreEmpresa.trim(),
+        descripcion: formData.descripcion.trim(),
+        telefono: formData.telefono.trim(),
+        direccion: formData.direccion.trim(),
         precioPorEvento: parseFloat(formData.precioPorEvento),
         añosExperiencia: parseInt(formData.añosExperiencia),
-        especialidad: formData.especialidad || undefined,
+        especialidad: formData.especialidad.trim(),
         usuarioId: user.id,
       },
       {
@@ -52,6 +111,17 @@ export default function BecomeOrganizer() {
           alert(error.response?.data?.message || 'Error al crear el perfil de organizador')
         },
       }
+    )
+  }
+
+  if (isCheckingOrganizador) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-gray-600">Verificando tu estado...</p>
+        </div>
+      </div>
     )
   }
 
@@ -84,9 +154,14 @@ export default function BecomeOrganizer() {
               value={formData.nombreEmpresa}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+                validationErrors.nombreEmpresa ? 'border-red-500' : 'border-gray-300'
+              }`}
               placeholder="Bodas Mágicas"
             />
+            {validationErrors.nombreEmpresa && (
+              <p className="text-red-500 text-sm mt-1">{validationErrors.nombreEmpresa}</p>
+            )}
           </div>
 
           <div>
@@ -100,14 +175,19 @@ export default function BecomeOrganizer() {
               value={formData.telefono}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+                validationErrors.telefono ? 'border-red-500' : 'border-gray-300'
+              }`}
               placeholder="+52 123 456 7890"
             />
+            {validationErrors.telefono && (
+              <p className="text-red-500 text-sm mt-1">{validationErrors.telefono}</p>
+            )}
           </div>
 
-          <div>
+            <div>
             <label htmlFor="direccion" className="block text-sm font-medium text-gray-700 mb-2">
-              Dirección
+              Dirección *
             </label>
             <input
               type="text"
@@ -115,15 +195,19 @@ export default function BecomeOrganizer() {
               name="direccion"
               value={formData.direccion}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-              placeholder="Ciudad, Estado"
+              required
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+                validationErrors.direccion ? 'border-red-500' : 'border-gray-300'
+              }`}
+              placeholder="Ciudad, Estado (Ej: Guadalajara, Jalisco)"
             />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {validationErrors.direccion && (
+              <p className="text-red-500 text-sm mt-1">{validationErrors.direccion}</p>
+            )}
+          </div>          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="precioPorEvento" className="block text-sm font-medium text-gray-700 mb-2">
-                Precio por Evento * ($)
+                Precio por Evento * ($1,000 - $500,000)
               </label>
               <input
                 type="number"
@@ -132,16 +216,22 @@ export default function BecomeOrganizer() {
                 value={formData.precioPorEvento}
                 onChange={handleChange}
                 required
-                min="0"
-                step="0.01"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="5000"
+                min="1000"
+                max="500000"
+                step="100"
+                className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+                  validationErrors.precioPorEvento ? 'border-red-500' : 'border-gray-300'
+                }`}
+                placeholder="15000"
               />
+              {validationErrors.precioPorEvento && (
+                <p className="text-red-500 text-sm mt-1">{validationErrors.precioPorEvento}</p>
+              )}
             </div>
 
             <div>
               <label htmlFor="añosExperiencia" className="block text-sm font-medium text-gray-700 mb-2">
-                Años de Experiencia *
+                Años de Experiencia * (1-50)
               </label>
               <input
                 type="number"
@@ -150,42 +240,63 @@ export default function BecomeOrganizer() {
                 value={formData.añosExperiencia}
                 onChange={handleChange}
                 required
-                min="0"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                min="1"
+                max="50"
+                className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+                  validationErrors.añosExperiencia ? 'border-red-500' : 'border-gray-300'
+                }`}
                 placeholder="5"
               />
+              {validationErrors.añosExperiencia && (
+                <p className="text-red-500 text-sm mt-1">{validationErrors.añosExperiencia}</p>
+              )}
             </div>
           </div>
 
-          <div>
-            <label htmlFor="especialidad" className="block text-sm font-medium text-gray-700 mb-2">
-              Especialidad
-            </label>
-            <input
-              type="text"
-              id="especialidad"
-              name="especialidad"
-              value={formData.especialidad}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-              placeholder="Bodas elegantes, eventos al aire libre, etc."
-            />
-          </div>
+<div>
+  <label htmlFor="especialidad" className="block text-sm font-medium text-gray-700 mb-2">
+    Especialidad *
+  </label>
+  <input
+    type="text"
+    id="especialidad"
+    name="especialidad"
+    value={formData.especialidad}
+    onChange={handleChange}
+    required
+    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+      validationErrors.especialidad ? 'border-red-500' : 'border-gray-300'
+    }`}
+    placeholder="Bodas elegantes, eventos corporativos, XV años..."
+  />
+</div>
 
-          <div>
-            <label htmlFor="descripcion" className="block text-sm font-medium text-gray-700 mb-2">
-              Descripción del Servicio
-            </label>
-            <textarea
-              id="descripcion"
-              name="descripcion"
-              value={formData.descripcion}
-              onChange={handleChange}
-              rows={4}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-              placeholder="Cuéntanos sobre tus servicios, experiencia, y qué te hace único..."
-            />
-          </div>
+<div className="mt-6">
+  <label htmlFor="descripcion" className="block text-sm font-medium text-gray-700 mb-2">
+    Descripción del Servicio * (mínimo 50 caracteres)
+  </label>
+  <textarea
+    id="descripcion"
+    name="descripcion"
+    value={formData.descripcion}
+    onChange={handleChange}
+    rows={4}
+    required
+    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${
+      validationErrors.descripcion ? 'border-red-500' : 'border-gray-300'
+    }`}
+    placeholder="Describe tus servicios, experiencia, logros, certificaciones, y qué te hace único como organizador profesional de eventos..."
+  />
+  
+  <div className="flex justify-between items-center mt-1">
+    <p className="text-gray-500 text-sm">
+      {formData.descripcion.length} / 50 caracteres mínimo
+    </p>
+    {validationErrors.descripcion && (
+      <p className="text-red-500 text-sm">{validationErrors.descripcion}</p>
+    )}
+  </div>
+</div>
 
           <div className="flex space-x-4">
             <button

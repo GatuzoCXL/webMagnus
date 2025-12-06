@@ -16,6 +16,15 @@ export function useOrganizador(id: string) {
   })
 }
 
+export function useOrganizadorByUsuarioId(usuarioId: string | undefined) {
+  return useQuery({
+    queryKey: ['organizador', 'usuario', usuarioId],
+    queryFn: () => organizadorService.getByUsuarioId(usuarioId!),
+    enabled: !!usuarioId,
+    retry: false,
+  })
+}
+
 export function useCreateOrganizador() {
   const queryClient = useQueryClient()
   return useMutation({

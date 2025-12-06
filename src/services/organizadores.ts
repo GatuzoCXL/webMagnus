@@ -37,6 +37,11 @@ export const organizadorService = {
     return response.data.data
   },
 
+  async getByUsuarioId(usuarioId: string): Promise<Organizador> {
+    const response = await api.get<{ data: Organizador }>(`/api/Organizadores/usuario/${usuarioId}`)
+    return response.data.data
+  },
+
   async create(data: CreateOrganizadorRequest): Promise<Organizador> {
     const response = await api.post<{ data: Organizador }>('/api/Organizadores', data)
     return response.data.data

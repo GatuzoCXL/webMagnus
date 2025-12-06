@@ -10,7 +10,6 @@ export default function Register() {
     email: '',
     password: '',
     confirmPassword: '',
-    rol: 0,
   })
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -65,7 +64,7 @@ export default function Register() {
         nombre: formData.nombre,
         email: formData.email,
         contrasena: formData.password,
-        rol: formData.rol,
+        rol: 0,
       })
       navigate('/dashboard')
     } catch (err: any) {
@@ -129,22 +128,6 @@ export default function Register() {
                 placeholder="tu@email.com"
                 required
               />
-            </div>
-
-            <div>
-              <label htmlFor="rol" className="block text-sm font-medium text-gray-700 mb-2">
-                Tipo de Cuenta
-              </label>
-              <select
-                id="rol"
-                name="rol"
-                value={formData.rol}
-                onChange={(e) => setFormData({ ...formData, rol: Number(e.target.value) })}
-                className="input"
-              >
-                <option value={0}>Cliente (Crear y asistir a eventos)</option>
-                <option value={1}>Organizador (Planificador de bodas)</option>
-              </select>
             </div>
 
             <div>
