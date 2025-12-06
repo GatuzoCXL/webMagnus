@@ -26,6 +26,15 @@ export interface CreateOrganizadorRequest {
   usuarioId: string
 }
 
+export interface OrganizadorStats {
+  eventosOrganizados: number
+  ingresosTotales: number
+  ratingPromedio: number
+  clientesSatisfechos: number
+  eventosPendientes: number
+  eventosProximos: number
+}
+
 export const organizadorService = {
   async getAll(): Promise<Organizador[]> {
     const response = await api.get<{ data: Organizador[] }>('/api/Organizadores')
@@ -44,6 +53,11 @@ export const organizadorService = {
 
   async create(data: CreateOrganizadorRequest): Promise<Organizador> {
     const response = await api.post<{ data: Organizador }>('/api/Organizadores', data)
+    return response.data.data
+  },
+
+  async getStats(id: string): Promise<OrganizadorStats> {
+    const response = await api.get<{ data: OrganizadorStats }>(`/api/Organizadores/${id}/estadisticas`)
     return response.data.data
   },
 }

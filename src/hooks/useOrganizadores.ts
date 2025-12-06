@@ -29,8 +29,10 @@ export function useCreateOrganizador() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: (data: CreateOrganizadorRequest) => organizadorService.create(data),
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['organizadores'] })
+      // Invalidate the user's organizador query to trigger reload
+      queryClient.invalidateQueries({ queryKey: ['organizador', 'usuario', data.usuarioId] })
     },
   })
 }

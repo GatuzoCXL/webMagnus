@@ -105,7 +105,8 @@ export default function BecomeOrganizer() {
       {
         onSuccess: (data) => {
           alert('¡Perfil de organizador creado exitosamente!')
-          navigate(`/organizadores/${data.id}`)
+          // Force reload to update the dashboard and UI
+          window.location.href = '/dashboard'
         },
         onError: (error: any) => {
           alert(error.response?.data?.message || 'Error al crear el perfil de organizador')
