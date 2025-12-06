@@ -1,5 +1,6 @@
 import { useAuth } from '../context/AuthContext'
 import { useEvents } from '../hooks/useEvents'
+import { useOrganizadorByUsuarioId } from '../hooks/useOrganizadores'
 import { getEventStatus } from '../utils/eventStatus'
 import { EventStatus } from '../types'
 import { motion } from 'framer-motion'
@@ -8,6 +9,7 @@ import { Link } from 'react-router-dom'
 export default function Dashboard() {
   const { user } = useAuth()
   const { data: events, isLoading } = useEvents(user?.id || '')
+  const { data: organizador } = useOrganizadorByUsuarioId(user?.id)
 
   const stats = {
     total: events?.length || 0,
@@ -35,6 +37,38 @@ export default function Dashboard() {
         </div>
       ) : (
         <>
+          {!organizador && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.05 }}
+              className="card bg-gradient-to-r from-purple-500 to-pink-500 text-white mb-6"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold mb-2">¿Eres organizador de eventos?</h3>
+                  <p className="text-sm opacity-90 mb-4">
+                    Únete a nuestra red de organizadores profesionales y ofrece tus servicios.
+                    Completa tu perfil y empieza a recibir solicitudes.
+                  </p>
+                  <Link
+                    to="/become-organizer"
+                    className="inline-flex items-center px-6 py-3 bg-white text-purple-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+                  >
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    Conviértete en Organizador
+                  </Link>
+                </div>
+                <div className="hidden lg:block">
+                  <svg className="w-32 h-32 opacity-30" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                  </svg>
+                </div>
+              </div>
+            </motion.div>
+          )}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
